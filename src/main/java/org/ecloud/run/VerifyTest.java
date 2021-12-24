@@ -35,15 +35,27 @@ public class VerifyTest {
         System.out.println(JSONObject.toJSONString(object));
     }
 
-
+    /**
+     * 吴丽英 建设银行 6217001930061279155 35020419830308652X 13606900677
+     */
     @Test
     public void getDownloadEvidenceUrl() {
-        EClientFinal client = new EClientFinal("yyz9304f0328d35d11c",
-                "d3ca73fbb6817511202dab7cfa6702b7", "https://testapi.ecloudsign.cn");
+        EClientFinal client = new EClientFinal("yyzzsb8f179pf8mejiz0",
+                "d617737f239f85972de27feca1aa0dd9", "https://huidu-api.ecloudsign.com");
+
+        Map<String, String> bankinfo = new HashMap<>();
+        bankinfo.put("realName","吴丽英");
+        bankinfo.put("bankNumber","6217001930061279155");
+        bankinfo.put("idCardNumber","35020419830308652X");
+        bankinfo.put("mobile","13606900677");
+        bankinfo.put("verifyType","4");
+
         Map<String, String> param = new HashMap<>();
-        param.put("mobilePhone","15010961260");
-        param.put("contractNum","33E212EF8AE92C5E");
-        JSONObject object = client.commonRequst(param, EClientFinal.Method.POST, "/ecs/contract/getDownloadEvidenceUrl.jspa");
+        param.put("bankInfo",JSONObject.toJSONString(bankinfo));
+        JSONObject object = client.commonRequst(param, EClientFinal.Method.POST, "/ecs/auth/bankVerify.jspa");
         System.out.println(JSONObject.toJSONString(object));
     }
+
+
+
 }
